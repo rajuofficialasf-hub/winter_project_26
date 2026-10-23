@@ -2,85 +2,184 @@
 <html lang="bn">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>শীতবস্ত্র প্রকল্প – আমার আবেদন</title>
+<meta name="theme-color" content="#0f5c4d">
+<title>শীতবস্ত্র প্রকল্প ২০২৬ – আস-সুন্নাহ ফাউন্ডেশন</title>
 <style>
   :root {
-    --bg: #f4f6f8; --card: #fff; --text: #1b2430; --muted: #5d6b7a;
-    --accent: #1a6b4a; --accent-text: #fff; --border: #d9e0e7; --err: #b3261e; --head: #eaf3ee;
+    --bg: #f1f5f7; --card: #ffffff; --text: #14212b; --muted: #5a6b78; --line: #dfe6eb;
+    --primary: #0f5c4d; --primary-2: #1b7a63; --on-primary: #ffffff;
+    --gold: #e2b04a; --err-bg: #fdecea; --err: #a61b12; --chip: #e8f3ef;
+    --hero-a: #0c4a3e; --hero-b: #1b7a63;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #14181d; --card: #1d232a; --text: #e8edf2; --muted: #9aa8b6;
-            --accent: #3fa578; --accent-text: #0c1a13; --border: #2f3944; --err: #f2867f; --head: #23312a; }
+    :root {
+      --bg: #0e1418; --card: #172027; --text: #e8eef2; --muted: #92a3af; --line: #26323a;
+      --primary: #3cae8e; --primary-2: #2f9e82; --on-primary: #06231b;
+      --err-bg: #3a1a18; --err: #ffb4ab; --chip: #1d3a31;
+      --hero-a: #0b3a31; --hero-b: #14604f;
+    }
   }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text);
-         font: 16px/1.5 "Noto Sans Bengali", "Kalpurush", "Nirmala UI", system-ui, sans-serif; }
-  main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
-  h1 { font-size: 1.4rem; margin: 0 0 16px; }
-  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
-  form { display: grid; gap: 12px; grid-template-columns: 1fr 1fr auto; align-items: end; }
-  label { display: grid; gap: 4px; font-size: .9rem; color: var(--muted); }
-  input { font: inherit; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px;
-          background: var(--bg); color: var(--text); width: 100%; }
-  button { font: inherit; font-weight: 600; padding: 10px 20px; border: 0; border-radius: 8px;
-           background: var(--accent); color: var(--accent-text); cursor: pointer; }
-  button:disabled { opacity: .6; cursor: wait; }
-  #msg { color: var(--err); margin: 0; min-height: 1.5em; }
-  .info { display: grid; gap: 8px 24px; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
-  .info div span { display: block; font-size: .8rem; color: var(--muted); }
-  .info div b { font-weight: 600; }
-  .tablewrap { overflow-x: auto; }
-  table { border-collapse: collapse; width: 100%; min-width: 640px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); white-space: nowrap; }
-  th { background: var(--head); position: sticky; top: 0; }
-  .total { color: var(--muted); margin: 0 0 8px; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 "Noto Sans Bengali", "Kalpurush", "Nirmala UI", "SolaimanLipi", system-ui, sans-serif;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* ---------- হেডার ---------- */
+  .hero {
+    background: linear-gradient(135deg, var(--hero-a), var(--hero-b));
+    color: #fff; text-align: center;
+    padding: calc(28px + env(safe-area-inset-top)) 20px 64px;
+  }
+  .org { margin: 0; font-size: .95rem; letter-spacing: .02em; opacity: .92; }
+  .org::after { content: ""; display: block; width: 44px; height: 3px; background: var(--gold);
+                border-radius: 3px; margin: 10px auto 0; }
+  h1 { margin: 12px 0 4px; font-size: 1.65rem; line-height: 1.3; font-weight: 700; }
+  .sub { margin: 0; font-size: .95rem; opacity: .9; }
+
+  main { max-width: 960px; margin: -40px auto 0; padding: 0 14px 32px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+          padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+
+  /* ---------- ফর্ম ---------- */
+  form { display: grid; gap: 14px; }
+  label { display: grid; gap: 6px; font-weight: 600; font-size: .95rem; }
+  input {
+    font: inherit; font-size: 18px; /* ১৬px+ হলে iPhone জুম করে না */
+    min-height: 52px; padding: 10px 14px; width: 100%;
+    border: 1.5px solid var(--line); border-radius: 12px;
+    background: var(--bg); color: var(--text);
+  }
+  input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent); }
+  .hint { margin: 0; color: var(--muted); font-size: .85rem; font-weight: 400; }
+  button {
+    font: inherit; font-size: 1.1rem; font-weight: 700; min-height: 54px; width: 100%;
+    border: 0; border-radius: 12px; cursor: pointer;
+    background: var(--primary); color: var(--on-primary);
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  button:active { transform: scale(.99); }
+  button:disabled { opacity: .75; cursor: progress; }
+  .spin { width: 18px; height: 18px; border: 3px solid currentColor; border-right-color: transparent;
+          border-radius: 50%; animation: sp .7s linear infinite; display: none; }
+  button:disabled .spin { display: inline-block; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+  #msg { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--err-bg); color: var(--err); font-weight: 600; }
+  #msg:empty { display: none; }
+
+  /* ---------- স্বেচ্ছাসেবকের তথ্য ---------- */
+  .info { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 12px; }
+  .info .wide { grid-column: 1 / -1; }
+  .info span { display: block; font-size: .78rem; color: var(--muted); }
+  .info b { font-weight: 700; font-size: 1.02rem; overflow-wrap: anywhere; }
+
+  .total { display: inline-block; margin: 0 0 12px; padding: 4px 12px; border-radius: 99px;
+           background: var(--chip); color: var(--primary); font-weight: 700; font-size: .95rem; }
+
+  /* ---------- তালিকা: মোবাইলে কার্ড ---------- */
+  table, tbody { display: block; }
+  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  tbody { display: grid; gap: 12px; }
+  tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; position: relative;
+       padding: 14px; padding-right: 74px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+  td { min-width: 0; overflow-wrap: anywhere; }
+  td::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--muted); }
+  td.name { grid-column: 1 / -1; font-weight: 700; font-size: 1.1rem; }
+  td.name::before { content: none; }
+  td.father, td.mobile { grid-column: 1 / -1; }
+  td.serial { position: absolute; top: 12px; right: 12px; padding: 2px 10px; border-radius: 99px;
+              background: var(--chip); color: var(--primary); font-weight: 700; font-size: .85rem; }
+  td.serial::before { content: "ক্রম "; display: inline; font-size: inherit; color: inherit; font-weight: 400; }
+  td a { color: var(--primary); font-weight: 700; text-decoration: none; }
+  td a::after { content: " 📞"; }
+
+  /* ---------- বড় স্ক্রিনে টেবিল ---------- */
+  @media (min-width: 720px) {
+    .hero { padding-bottom: 72px; }
+    h1 { font-size: 2.1rem; }
+    main { padding: 0 20px 48px; }
+    .card { padding: 22px; }
+    form { grid-template-columns: 1fr 1fr auto; align-items: end; }
+    button { width: auto; padding: 0 32px; }
+    .info { grid-template-columns: repeat(5, 1fr); }
+    .info .wide { grid-column: auto; }
+    table { display: table; width: 100%; border-collapse: collapse; }
+    thead { position: static; width: auto; height: auto; overflow: visible; clip: auto; display: table-header-group; }
+    tbody { display: table-row-group; }
+    tr { display: table-row; padding: 0; border: 0; background: none; }
+    th, td { display: table-cell; padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    th { background: var(--chip); color: var(--primary); font-size: .9rem; }
+    td::before { content: none !important; }
+    td.name { font-size: inherit; }
+    td.serial { position: static; padding: 10px 12px; background: none; border-radius: 0; font-weight: 400; color: inherit; font-size: inherit; }
+  }
+
+  footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 4px 16px 28px; }
   [hidden] { display: none !important; }
-  @media (max-width: 640px) { form { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-<main>
-  <h1>শীতবস্ত্র প্রকল্প – আপনার পাঠানো আবেদন</h1>
+<header class="hero">
+  <p class="org">আস-সুন্নাহ ফাউন্ডেশন</p>
+  <h1>শীতবস্ত্র প্রকল্প ২০২৬</h1>
+  <p class="sub">আপনার পাঠানো আবেদনগুলো দেখুন</p>
+</header>
 
+<main>
   <section class="card">
-    <form id="f" autocomplete="off">
+    <form id="f" autocomplete="off" novalidate>
       <label>স্পট কোড
-        <input id="spot" name="spot" required maxlength="40">
+        <input id="spot" required maxlength="40" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="next">
       </label>
       <label>আপনার মোবাইল নম্বর
-        <input id="mobile" name="mobile" required inputmode="tel" maxlength="20" placeholder="01XXXXXXXXX">
+        <input id="mobile" required inputmode="numeric" autocomplete="tel" maxlength="20" placeholder="01XXXXXXXXX" enterkeyhint="go">
       </label>
-      <button id="btn" type="submit">দেখুন</button>
+      <button id="btn" type="submit"><span class="spin" aria-hidden="true"></span><span id="btnText">আবেদন দেখুন</span></button>
     </form>
-    <p id="msg" role="alert"></p>
+    <p class="hint" style="margin-top:12px">আবেদন ফর্মে আপনি যে স্পট কোড ও নিজের মোবাইল নম্বর দিয়েছেন, সেটাই লিখুন।</p>
+    <p id="msg" role="alert" aria-live="assertive" style="margin-top:12px"></p>
   </section>
 
   <section id="result" hidden>
     <div class="card info" id="info"></div>
     <div class="card">
       <p class="total" id="total"></p>
-      <div class="tablewrap">
-        <table>
-          <thead><tr>
-            <th>ক্রম</th><th>উপকারভোগীর নাম</th><th>পিতার নাম</th><th>মোবাইল</th><th>ইউনিয়ন</th><th>গ্রাম</th>
-          </tr></thead>
-          <tbody id="rows"></tbody>
-        </table>
-      </div>
+      <table>
+        <thead><tr>
+          <th>ক্রম</th><th>উপকারভোগীর নাম</th><th>পিতার নাম</th><th>মোবাইল</th><th>ইউনিয়ন</th><th>গ্রাম</th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
     </div>
   </section>
 </main>
+
+<footer>© আস-সুন্নাহ ফাউন্ডেশন · শীতবস্ত্র প্রকল্প ২০২৬</footer>
 
 <script src="config.js"></script>
 <script>
   const $ = (id) => document.getElementById(id);
   const bn = (n) => Number(n).toLocaleString("bn-BD");
 
-  function cell(tr, text) {
+  // textContent ব্যবহার: ডেটার ভেতরের HTML কখনো চলবে না
+  function cell(tr, cls, label, value, isPhone) {
     const td = document.createElement("td");
-    td.textContent = text ?? "";   // textContent: ডেটার ভেতরের HTML চলবে না
+    td.className = cls;
+    td.dataset.label = label;
+    const text = value ?? "";
+    const digits = String(text).replace(/[^\d+]/g, "");
+    if (isPhone && /^\+?\d{6,15}$/.test(digits)) {
+      const a = document.createElement("a");
+      a.href = "tel:" + digits;
+      a.textContent = text;
+      td.appendChild(a);
+    } else {
+      td.textContent = text || (cls === "name" ? "" : "—");
+    }
     tr.appendChild(td);
   }
 
@@ -88,9 +187,10 @@
     const v = d.volunteer;
     const info = $("info");
     info.replaceChildren();
-    [["নাম", v.name], ["মোবাইল", v.mobile], ["স্পট কোড", v.spot_code],
-     ["জেলা", v.district], ["উপজেলা", v.upazila]].forEach(([k, val]) => {
+    [["নাম", v.name, true], ["মোবাইল", v.mobile], ["স্পট কোড", v.spot_code],
+     ["জেলা", v.district], ["উপজেলা", v.upazila]].forEach(([k, val, wide]) => {
       const div = document.createElement("div");
+      if (wide) div.className = "wide";
       const s = document.createElement("span"); s.textContent = k;
       const b = document.createElement("b"); b.textContent = val || "—";
       div.append(s, b); info.appendChild(div);
@@ -101,18 +201,29 @@
     tbody.replaceChildren();
     d.rows.forEach((r, i) => {
       const tr = document.createElement("tr");
-      cell(tr, bn(i + 1)); cell(tr, r.name); cell(tr, r.father);
-      cell(tr, r.mobile); cell(tr, r.union); cell(tr, r.village);
+      cell(tr, "serial", "ক্রম", bn(i + 1));
+      cell(tr, "name", "উপকারভোগীর নাম", r.name);
+      cell(tr, "father", "পিতার নাম", r.father);
+      cell(tr, "mobile", "মোবাইল", r.mobile, true);
+      cell(tr, "union", "ইউনিয়ন", r.union);
+      cell(tr, "village", "গ্রাম", r.village);
       tbody.appendChild(tr);
     });
     $("result").hidden = false;
+    $("result").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   $("f").addEventListener("submit", async (e) => {
     e.preventDefault();
-    $("msg").textContent = "";
+    const msg = $("msg");
+    msg.textContent = "";
+    if (!$("spot").value.trim() || !$("mobile").value.trim()) {
+      msg.textContent = "স্পট কোড ও মোবাইল নম্বর, দুটোই লিখুন।";
+      return;
+    }
     $("result").hidden = true;
     $("btn").disabled = true;
+    $("btnText").textContent = "খুঁজছি…";
     try {
       const res = await fetch(window.APP_CONFIG.LOOKUP_URL, {
         method: "POST",
@@ -120,12 +231,13 @@
         body: JSON.stringify({ spot_code: $("spot").value, mobile: $("mobile").value }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) { $("msg").textContent = data.error || "কিছু একটা সমস্যা হয়েছে।"; return; }
+      if (!res.ok) { msg.textContent = data.error || "কিছু একটা সমস্যা হয়েছে।"; return; }
       render(data);
     } catch {
-      $("msg").textContent = "ইন্টারনেট সংযোগ বা সার্ভারে সমস্যা। আবার চেষ্টা করুন।";
+      msg.textContent = "ইন্টারনেট সংযোগ বা সার্ভারে সমস্যা। আবার চেষ্টা করুন।";
     } finally {
       $("btn").disabled = false;
+      $("btnText").textContent = "আবেদন দেখুন";
     }
   });
 </script>
