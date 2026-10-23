@@ -1,0 +1,30 @@
+name: Kobo → Supabase sync
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      full:
+        description: "সব আবেদন নতুন করে টানুন (প্রথমবার বা ডেটা মেলাতে)"
+        type: boolean
+        default: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call kobo-sync until done
+        env:
+          URL: ${{ secrets.SUPABASE_URL }}/functions/v1/kobo-sync
+          SECRET: ${{ secrets.SYNC_SECRET }}
+          FULL: ${{ inputs.full == true }}
+        run: |
+          cursor=""
+          for i in $(seq 1 40); do
+            body=$(jq -n --argjson full "$FULL" --arg cursor "$cursor" '{full:$full, cursor:$cursor}')
+            resp=$(curl -fsS -X POST "$URL" -H "x-sync-secret: $SECRET" -H "content-type: application/json" -d "$body")
+            echo "$resp" | jq -c 'del(.next)'
+            [ "$(echo "$resp" | jq -r '.done')" = "true" ] && exit 0
+            cursor=$(echo "$resp" | jq -r '.next')
+          done
+          echo "সময় শেষ, পরের রানে বাকিটা হবে" >&2
