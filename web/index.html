@@ -81,21 +81,21 @@
            background: var(--chip); color: var(--primary); font-weight: 700; font-size: .95rem; }
 
   /* ---------- তালিকা: মোবাইলে কার্ড ---------- */
-  table, tbody { display: block; }
-  thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  tbody { display: grid; gap: 12px; }
-  tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; position: relative;
+  .applist, .applist tbody { display: block; }
+  .applist thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .applist tbody { display: grid; gap: 12px; }
+  .applist tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; position: relative;
        padding: 14px; padding-right: 74px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
-  td { min-width: 0; overflow-wrap: anywhere; }
-  td::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--muted); }
-  td.name { grid-column: 1 / -1; font-weight: 700; font-size: 1.1rem; }
-  td.name::before { content: none; }
-  td.father, td.mobile { grid-column: 1 / -1; }
-  td.serial { position: absolute; top: 12px; right: 12px; padding: 2px 10px; border-radius: 99px;
+  .applist td { min-width: 0; overflow-wrap: anywhere; }
+  .applist td::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--muted); }
+  .applist td.name { grid-column: 1 / -1; font-weight: 700; font-size: 1.1rem; }
+  .applist td.name::before { content: none; }
+  .applist td.father, .applist td.mobile { grid-column: 1 / -1; }
+  .applist td.serial { position: absolute; top: 12px; right: 12px; padding: 2px 10px; border-radius: 99px;
               background: var(--chip); color: var(--primary); font-weight: 700; font-size: .85rem; }
-  td.serial::before { content: "ক্রম "; display: inline; font-size: inherit; color: inherit; font-weight: 400; }
-  td a { color: var(--primary); font-weight: 700; text-decoration: none; }
-  td a::after { content: " 📞"; }
+  .applist td.serial::before { content: "ক্রম "; display: inline; font-size: inherit; color: inherit; font-weight: 400; }
+  .applist td a { color: var(--primary); font-weight: 700; text-decoration: none; }
+  .applist td a::after { content: " 📞"; }
 
   /* ---------- বড় স্ক্রিনে টেবিল ---------- */
   @media (min-width: 720px) {
@@ -107,16 +107,53 @@
     button { width: auto; padding: 0 32px; }
     .info { grid-template-columns: repeat(5, 1fr); }
     .info .wide { grid-column: auto; }
-    table { display: table; width: 100%; border-collapse: collapse; }
-    thead { position: static; width: auto; height: auto; overflow: visible; clip: auto; display: table-header-group; }
-    tbody { display: table-row-group; }
-    tr { display: table-row; padding: 0; border: 0; background: none; }
-    th, td { display: table-cell; padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
-    th { background: var(--chip); color: var(--primary); font-size: .9rem; }
-    td::before { content: none !important; }
-    td.name { font-size: inherit; }
-    td.serial { position: static; padding: 10px 12px; background: none; border-radius: 0; font-weight: 400; color: inherit; font-size: inherit; }
+    .applist { display: table; width: 100%; border-collapse: collapse; }
+    .applist thead { position: static; width: auto; height: auto; overflow: visible; clip: auto; display: table-header-group; }
+    .applist tbody { display: table-row-group; }
+    .applist tr { display: table-row; padding: 0; border: 0; background: none; }
+    .applist th, .applist td { display: table-cell; padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    .applist th { background: var(--chip); color: var(--primary); font-size: .9rem; }
+    .applist td::before { content: none !important; }
+    .applist td.name { font-size: inherit; }
+    .applist td.serial { position: static; padding: 10px 12px; background: none; border-radius: 0; font-weight: 400; color: inherit; font-size: inherit; }
   }
+
+  /* ---------- PDF বাটন ---------- */
+  .actions { display: grid; gap: 10px; grid-template-columns: 1fr; }
+  .actions h2 { margin: 0; font-size: 1rem; }
+  button.alt { background: var(--chip); color: var(--primary); border: 1.5px solid var(--primary); }
+  @media (min-width: 480px) { .actions .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; } }
+  .actions .btns { display: grid; gap: 10px; }
+  #pdfMsg { margin: 0; color: var(--muted); font-size: .9rem; min-height: 1.3em; }
+
+  /* ---------- PDF-এর পাতা (পর্দার বাইরে আঁকা হয়, সবসময় সাদা-কালো) ---------- */
+  #pdfRoot { position: absolute; left: -10000px; top: 0; }
+  .pdf-page { width: 794px; height: 1123px; background: #fff; color: #000; position: relative; overflow: hidden;
+              font: 13px/1.3 "Noto Sans Bengali", "Kalpurush", "Nirmala UI", "SolaimanLipi", system-ui, sans-serif; }
+  .pdf-list { padding: 36px 40px; }
+  .pdf-org { text-align: center; font-size: 22px; font-weight: 700; }
+  .pdf-proj { text-align: center; font-size: 15px; margin-top: 2px; }
+  .pdf-vol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; margin: 14px 0 12px;
+             padding: 8px 10px; border: 1px solid #888; font-size: 12.5px; }
+  .pdf-vol b { font-weight: 700; }
+  .pdf-mini { text-align: center; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .pdf-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 12.5px; }
+  .pdf-table th, .pdf-table td { border: 1px solid #777; padding: 0 5px; text-align: left; vertical-align: middle; }
+  .pdf-table th { background: #e9e9e9; color: #000; height: 28px; font-weight: 700; }
+  .pdf-table td { height: 34px; }
+  .pdf-table td > div { max-height: 30px; line-height: 15px; overflow: hidden; }
+  .pdf-foot { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 11px; color: #444; }
+
+  .pdf-tok { padding: 28px; }
+  .tok-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(9, 1fr);
+              height: 100%; border-top: 1px dashed #666; border-left: 1px dashed #666; }
+  .tok { border-right: 1px dashed #666; border-bottom: 1px dashed #666; padding: 6px 9px; overflow: hidden;
+         font-size: 10.5px; line-height: 13px; min-width: 0; }
+  .tok-org { text-align: center; font-weight: 700; font-size: 12.5px; line-height: 15px; }
+  .tok-proj { text-align: center; font-size: 10.5px; border-bottom: 1px solid #999; padding-bottom: 2px; margin-bottom: 3px; }
+  .tok-no { font-weight: 700; font-size: 14.5px; line-height: 19px; }
+  .tok-line { white-space: nowrap; overflow: hidden; }
+  .tok-addr { max-height: 26px; overflow: hidden; }
 
   footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 4px 16px 28px; }
   [hidden] { display: none !important; }
@@ -146,9 +183,17 @@
 
   <section id="result" hidden>
     <div class="card info" id="info"></div>
+    <div class="card actions">
+      <h2>PDF ডাউনলোড</h2>
+      <div class="btns">
+        <button type="button" class="alt" id="btnList"><span class="spin" aria-hidden="true"></span><span>📄 তালিকা ডাউনলোড</span></button>
+        <button type="button" class="alt" id="btnTok"><span class="spin" aria-hidden="true"></span><span>🎫 টোকেন ডাউনলোড</span></button>
+      </div>
+      <p id="pdfMsg" role="status" aria-live="polite"></p>
+    </div>
     <div class="card">
       <p class="total" id="total"></p>
-      <table>
+      <table class="applist">
         <thead><tr>
           <th>ক্রম</th><th>উপকারভোগীর নাম</th><th>পিতার নাম</th><th>মোবাইল</th><th>ইউনিয়ন</th><th>গ্রাম</th>
         </tr></thead>
@@ -159,6 +204,7 @@
 </main>
 
 <footer>© আস-সুন্নাহ ফাউন্ডেশন · শীতবস্ত্র প্রকল্প ২০২৬</footer>
+<div id="pdfRoot" aria-hidden="true"></div>
 
 <script src="config.js"></script>
 <script>
@@ -213,6 +259,143 @@
     $("result").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  /* ================= PDF ================= */
+  let lastData = null;
+  const LIST_FIRST = 24, LIST_NEXT = 28, TOK_PER_PAGE = 27;
+
+  // নিরাপদে এলিমেন্ট বানায় (textContent), ডেটার HTML চলে না
+  function el(tag, cls, text) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function chunks(rows, first, next) {
+    const out = []; let i = 0, size = first;
+    while (i < rows.length) { out.push(rows.slice(i, i + size).map((r, k) => [i + k + 1, r])); i += size; size = next; }
+    return out;
+  }
+  function header(cls) { // প্রতিষ্ঠানের নাম + প্রকল্প
+    const f = document.createDocumentFragment();
+    f.append(el("div", "pdf-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "pdf-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"));
+    return f;
+  }
+
+  function buildListPages(d) {
+    const v = d.volunteer, parts = chunks(d.rows, LIST_FIRST, LIST_NEXT);
+    return parts.map((part, pi) => {
+      const page = el("div", "pdf-page pdf-list");
+      if (pi === 0) {
+        page.appendChild(header());
+        const vol = el("div", "pdf-vol");
+        [["স্বেচ্ছাসেবক", v.name], ["মোবাইল", v.mobile], ["স্পট কোড", v.spot_code],
+         ["জেলা", v.district], ["উপজেলা", v.upazila], ["মোট আবেদন", bn(d.total) + " টি"]].forEach(([k, val]) => {
+          const d1 = el("div"); d1.append(el("b", "", k + ": "), document.createTextNode(val || "—")); vol.appendChild(d1);
+        });
+        page.appendChild(vol);
+      } else {
+        page.appendChild(el("div", "pdf-mini", "আস-সুন্নাহ ফাউন্ডেশন · শীতবস্ত্র বিতরণ প্রকল্প-২০২৬ · স্পট কোড: " + (v.spot_code || "")));
+      }
+      const t = el("table", "pdf-table");
+      const cg = ["8%", "24%", "22%", "15%", "15%", "16%"];
+      cg.forEach((w) => { const c = document.createElement("col"); c.style.width = w; t.appendChild(c); });
+      const hr = document.createElement("tr");
+      ["ক্রম", "উপকারভোগীর নাম", "পিতার নাম", "মোবাইল", "ইউনিয়ন", "গ্রাম"].forEach((h) => hr.appendChild(el("th", "", h)));
+      const th = document.createElement("thead"); th.appendChild(hr); t.appendChild(th);
+      const tb = document.createElement("tbody");
+      part.forEach(([n, r]) => {
+        const tr = document.createElement("tr");
+        [bn(n), r.name, r.father, r.mobile, r.union, r.village].forEach((val) => {
+          const td = document.createElement("td"); td.appendChild(el("div", "", val || "")); tr.appendChild(td);
+        });
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb); page.appendChild(t);
+      page.appendChild(el("div", "pdf-foot", "পৃষ্ঠা " + bn(pi + 1) + " / " + bn(parts.length)));
+      return page;
+    });
+  }
+
+  function shrinkToFit(node, minPx) {
+    let size = parseFloat(getComputedStyle(node).fontSize);
+    while (node.scrollWidth > node.clientWidth && size > minPx) { size -= 0.5; node.style.fontSize = size + "px"; }
+  }
+
+  function buildTokenPages(d) {
+    const v = d.volunteer, pages = [];
+    for (let i = 0; i < d.rows.length; i += TOK_PER_PAGE) {
+      const page = el("div", "pdf-page pdf-tok"), grid = el("div", "tok-grid");
+      d.rows.slice(i, i + TOK_PER_PAGE).forEach((r, k) => {
+        const t = el("div", "tok");
+        t.append(el("div", "tok-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "tok-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"),
+                 el("div", "tok-no", "টোকেন নম্বর : " + bn(i + k + 1)));
+        t.append(el("div", "tok-line tok-name", "নাম : " + (r.name || "")),
+                 el("div", "tok-line tok-father", "পিতা : " + (r.father || "")));
+        const addr = [r.village, r.union, v.upazila, v.district].filter(Boolean).join(", ");
+        t.appendChild(el("div", "tok-addr", "ঠিকানা : " + addr));
+        grid.appendChild(t);
+      });
+      page.appendChild(grid); pages.push(page);
+    }
+    return pages;
+  }
+
+  function loadScript(src) {
+    return new Promise((ok, fail) => {
+      const s = document.createElement("script");
+      s.src = src; s.onload = ok; s.onerror = () => fail(new Error("load " + src));
+      document.head.appendChild(s);
+    });
+  }
+  let libs = null;
+  function ensureLibs() { // প্রথমবার চাপলে তবেই লাইব্রেরি নামে, ফলে পেজ হালকা থাকে
+    libs = libs || Promise.all([loadScript("vendor/html2canvas.min.js"), loadScript("vendor/jspdf.umd.min.js")]);
+    return libs;
+  }
+
+  async function makePdf(pages, opts = {}) {
+    await ensureLibs();
+    const root = $("pdfRoot");
+    root.replaceChildren(...pages);
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    root.querySelectorAll(".tok-name, .tok-father").forEach((n) => shrinkToFit(n, 7.5));
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait", compress: true });
+    try {
+      for (let i = 0; i < pages.length; i++) {
+        const canvas = await html2canvas(pages[i], { scale: opts.scale || 2.2, backgroundColor: "#ffffff",
+          logging: false, width: 794, height: 1123, windowWidth: 794 });
+        if (i) pdf.addPage();
+        pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, 210, 297);
+        canvas.width = canvas.height = 0; // মেমরি ছাড়ুন
+      }
+    } finally { root.replaceChildren(); }
+    return pdf;
+  }
+
+  function fileName(kind) {
+    const spot = String((lastData && lastData.volunteer.spot_code) || "spot").replace(/[^\w\-]+/g, "") || "spot";
+    return (kind === "list" ? "talika" : "token") + "-spot-" + spot + ".pdf";
+  }
+
+  async function downloadPdf(kind, btn) {
+    if (!lastData) return;
+    const msg = $("pdfMsg"), all = [$("btnList"), $("btnTok")];
+    all.forEach((b) => (b.disabled = true));
+    msg.textContent = "PDF তৈরি হচ্ছে, একটু অপেক্ষা করুন…";
+    try {
+      const pages = kind === "list" ? buildListPages(lastData) : buildTokenPages(lastData);
+      const pdf = await makePdf(pages);
+      pdf.save(fileName(kind));
+      msg.textContent = "ডাউনলোড শুরু হয়েছে (" + bn(pages.length) + " পৃষ্ঠা)।";
+    } catch (err) {
+      console.error(err);
+      msg.textContent = "PDF তৈরি করা যায়নি। ইন্টারনেট ঠিক আছে কি না দেখে আবার চেষ্টা করুন।";
+    } finally { all.forEach((b) => (b.disabled = false)); }
+  }
+  $("btnList").addEventListener("click", () => downloadPdf("list"));
+  $("btnTok").addEventListener("click", () => downloadPdf("token"));
+
   $("f").addEventListener("submit", async (e) => {
     e.preventDefault();
     const msg = $("msg");
@@ -232,6 +415,8 @@
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) { msg.textContent = data.error || "কিছু একটা সমস্যা হয়েছে।"; return; }
+      lastData = data;
+      $("pdfMsg").textContent = "";
       render(data);
     } catch {
       msg.textContent = "ইন্টারনেট সংযোগ বা সার্ভারে সমস্যা। আবার চেষ্টা করুন।";
