@@ -6,6 +6,8 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0f5c4d">
 <title>শীতবস্ত্র প্রকল্প ২০২৬ – আস-সুন্নাহ ফাউন্ডেশন</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 <style>
   :root {
     --bg: #f1f5f7; --card: #ffffff; --text: #14212b; --muted: #5a6b78; --line: #dfe6eb;
@@ -35,6 +37,10 @@
     color: #fff; text-align: center;
     padding: calc(28px + env(safe-area-inset-top)) 20px 64px;
   }
+  .logo-badge { display: inline-block; background: #fff; border-radius: 18px; padding: 8px 16px; margin-bottom: 12px;
+                box-shadow: 0 4px 14px rgba(0,0,0,.18); }
+  .logo-badge img { display: block; height: 70px; width: auto; }
+  .foot-logo { height: 38px; width: auto; background: #fff; border-radius: 8px; padding: 3px 7px; margin-bottom: 6px; }
   .org { margin: 0; font-size: .95rem; letter-spacing: .02em; opacity: .92; }
   .org::after { content: ""; display: block; width: 44px; height: 3px; background: var(--gold);
                 border-radius: 3px; margin: 10px auto 0; }
@@ -131,12 +137,16 @@
   .pdf-page { width: 794px; height: 1123px; background: #fff; color: #000; position: relative; overflow: hidden;
               font: 13px/1.3 "Noto Sans Bengali", "Kalpurush", "Nirmala UI", "SolaimanLipi", system-ui, sans-serif; }
   .pdf-list { padding: 36px 40px; }
-  .pdf-org { text-align: center; font-size: 22px; font-weight: 700; }
-  .pdf-proj { text-align: center; font-size: 15px; margin-top: 2px; }
+  .pdf-brand { display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .pdf-logo { height: 72px; width: auto; display: block; }
+  .pdf-org { font-size: 22px; font-weight: 700; }
+  .pdf-proj { font-size: 15px; margin-top: 2px; }
+  .pdf-minibrand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+  .pdf-minilogo { height: 30px; width: auto; display: block; }
   .pdf-vol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; margin: 14px 0 12px;
              padding: 8px 10px; border: 1px solid #888; font-size: 12.5px; }
   .pdf-vol b { font-weight: 700; }
-  .pdf-mini { text-align: center; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+  .pdf-mini { font-size: 13px; font-weight: 700; }
   .pdf-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 12.5px; }
   .pdf-table th, .pdf-table td { border: 1px solid #777; padding: 0 5px; text-align: left; vertical-align: middle; }
   .pdf-table th { background: #e9e9e9; color: #000; height: 28px; font-weight: 700; }
@@ -149,8 +159,11 @@
               height: 100%; border-top: 1px dashed #666; border-left: 1px dashed #666; }
   .tok { border-right: 1px dashed #666; border-bottom: 1px dashed #666; padding: 6px 9px; overflow: hidden;
          font-size: 10.5px; line-height: 13px; min-width: 0; }
-  .tok-org { text-align: center; font-weight: 700; font-size: 12.5px; line-height: 15px; }
-  .tok-proj { text-align: center; font-size: 10.5px; border-bottom: 1px solid #999; padding-bottom: 2px; margin-bottom: 3px; }
+  .tok-top { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #999; padding-bottom: 2px; margin-bottom: 3px; }
+  .tok-logo { height: 28px; width: auto; display: block; flex: none; }
+  .tok-brand { flex: 1; text-align: center; }
+  .tok-org { font-weight: 700; font-size: 12.5px; line-height: 15px; }
+  .tok-proj { font-size: 10.5px; line-height: 13px; }
   .tok-no { font-weight: 700; font-size: 14.5px; line-height: 19px; }
   .tok-line { white-space: nowrap; overflow: hidden; }
   .tok-addr { max-height: 26px; overflow: hidden; }
@@ -161,6 +174,7 @@
 </head>
 <body>
 <header class="hero">
+  <div class="logo-badge"><img src="logo.png" alt="আস-সুন্নাহ ফাউন্ডেশন" width="299" height="196"></div>
   <p class="org">আস-সুন্নাহ ফাউন্ডেশন</p>
   <h1>শীতবস্ত্র প্রকল্প ২০২৬</h1>
   <p class="sub">আপনার পাঠানো আবেদনগুলো দেখুন</p>
@@ -203,7 +217,7 @@
   </section>
 </main>
 
-<footer>© আস-সুন্নাহ ফাউন্ডেশন · শীতবস্ত্র প্রকল্প ২০২৬</footer>
+<footer><img class="foot-logo" src="logo.png" alt="" width="299" height="196"><br>© আস-সুন্নাহ ফাউন্ডেশন · শীতবস্ত্র প্রকল্প ২০২৬</footer>
 <div id="pdfRoot" aria-hidden="true"></div>
 
 <script src="config.js"></script>
@@ -275,10 +289,16 @@
     while (i < rows.length) { out.push(rows.slice(i, i + size).map((r, k) => [i + k + 1, r])); i += size; size = next; }
     return out;
   }
-  function header(cls) { // প্রতিষ্ঠানের নাম + প্রকল্প
-    const f = document.createDocumentFragment();
-    f.append(el("div", "pdf-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "pdf-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"));
-    return f;
+  function logo(cls) {
+    const i = document.createElement("img");
+    i.src = "logo.png"; i.alt = ""; i.className = cls;
+    return i;
+  }
+  function header() { // লোগো + প্রতিষ্ঠানের নাম + প্রকল্প
+    const box = el("div", "pdf-brand"), txt = el("div");
+    txt.append(el("div", "pdf-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "pdf-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"));
+    box.append(logo("pdf-logo"), txt);
+    return box;
   }
 
   function buildListPages(d) {
@@ -294,7 +314,10 @@
         });
         page.appendChild(vol);
       } else {
-        page.appendChild(el("div", "pdf-mini", "আস-সুন্নাহ ফাউন্ডেশন · শীতবস্ত্র বিতরণ প্রকল্প-২০২৬ · স্পট কোড: " + (v.spot_code || "")));
+        const mini = el("div", "pdf-minibrand");
+        mini.append(logo("pdf-minilogo"),
+          el("div", "pdf-mini", "আস-সুন্নাহ ফাউন্ডেশন · শীতবস্ত্র বিতরণ প্রকল্প-২০২৬ · স্পট কোড: " + (v.spot_code || "")));
+        page.appendChild(mini);
       }
       const t = el("table", "pdf-table");
       const cg = ["8%", "24%", "22%", "15%", "15%", "16%"];
@@ -327,8 +350,10 @@
       const page = el("div", "pdf-page pdf-tok"), grid = el("div", "tok-grid");
       d.rows.slice(i, i + TOK_PER_PAGE).forEach((r, k) => {
         const t = el("div", "tok");
-        t.append(el("div", "tok-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "tok-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"),
-                 el("div", "tok-no", "টোকেন নম্বর : " + bn(i + k + 1)));
+        const top = el("div", "tok-top"), brand = el("div", "tok-brand");
+        brand.append(el("div", "tok-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "tok-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"));
+        top.append(logo("tok-logo"), brand);
+        t.append(top, el("div", "tok-no", "টোকেন নম্বর : " + bn(i + k + 1)));
         t.append(el("div", "tok-line tok-name", "নাম : " + (r.name || "")),
                  el("div", "tok-line tok-father", "পিতা : " + (r.father || "")));
         const addr = [r.village, r.union, v.upazila, v.district].filter(Boolean).join(", ");
@@ -358,6 +383,9 @@
     const root = $("pdfRoot");
     root.replaceChildren(...pages);
     if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    // লোগো পুরো লোড না হলে PDF-এ ফাঁকা আসত
+    await Promise.all([...root.querySelectorAll("img")].map((im) =>
+      im.complete && im.naturalWidth ? 0 : new Promise((ok) => { im.onload = im.onerror = ok; })));
     root.querySelectorAll(".tok-name, .tok-father").forEach((n) => shrinkToFit(n, 7.5));
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait", compress: true });
