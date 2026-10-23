@@ -1,4 +1,4 @@
--- ⚠️ শুধু পরীক্ষার নকল ডেটা। আসল সিস্টেম চালুর আগে মুছে ফেলুন:
+-- শুধু পরীক্ষার নকল ডেটা। আসল সিস্টেম চালুর আগে মুছে ফেলুন:
 --   delete from public.applications where kobo_id < 0;
 insert into public.applications
   (kobo_id, spot_code, spot_code_norm, volunteer_name, volunteer_mobile, volunteer_mobile_norm,

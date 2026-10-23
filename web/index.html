@@ -18,14 +18,14 @@
     --bg: #eef2f0; --card: #ffffff; --text: #0f2920; --muted: #637381; --line: #d8e1dc;
     --primary: #008e48; --on-primary: #ffffff;
     --gold: #e8b65d; --orange: #d08322; --err-bg: #fdecea; --err: #b3261e; --chip: #e1f1e8;
-    --hero-a: #0f2920; --hero-b: #0a6b3a;
+    --hero-a: #0f2920;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #0b1612; --card: #12221b; --text: #e8f1ec; --muted: #9bb0a6; --line: #223a2f;
       --primary: #2fbf74; --on-primary: #062217;
       --err-bg: #3a1a18; --err: #ffb4ab; --chip: #17382a;
-      --hero-a: #08150f; --hero-b: #0a5a33;
+      --hero-a: #08150f;
     }
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -38,23 +38,20 @@
 
   /* ---------- হেডার ---------- */
   .hero {
-    background: linear-gradient(135deg, var(--hero-a), var(--hero-b));
+    background: var(--hero-a); border-bottom: 4px solid var(--gold);
     color: #fff; text-align: center;
-    padding: calc(28px + env(safe-area-inset-top)) 20px 64px;
+    padding: calc(22px + env(safe-area-inset-top)) 20px 22px;
   }
-  .logo-badge { display: inline-block; background: #fff; border-radius: 18px; padding: 8px 16px; margin-bottom: 12px;
-                box-shadow: 0 4px 14px rgba(0,0,0,.18); }
-  .logo-badge img { display: block; height: 70px; width: auto; }
-  .foot-logo { height: 38px; width: auto; background: #fff; border-radius: 8px; padding: 3px 7px; margin-bottom: 6px; }
-  .org { margin: 0; font-size: .95rem; letter-spacing: .02em; opacity: .92; }
-  .org::after { content: ""; display: block; width: 44px; height: 3px; background: var(--gold);
-                border-radius: 3px; margin: 10px auto 0; }
-  h1 { margin: 12px 0 4px; font-size: 1.65rem; line-height: 1.3; font-weight: 700; }
-  .sub { margin: 0; font-size: .95rem; opacity: .9; }
+  .logo-badge { display: inline-block; background: #fff; border-radius: 4px; padding: 6px 12px; margin-bottom: 10px; }
+  .logo-badge img { display: block; height: 64px; width: auto; }
+  .foot-logo { height: 36px; width: auto; background: #fff; border-radius: 4px; padding: 3px 7px; margin-bottom: 6px; }
+  .org { margin: 0; font-size: 1rem; }
+  h1 { margin: 4px 0 2px; font-size: 1.55rem; line-height: 1.3; font-weight: 700; }
+  .sub { margin: 0; font-size: .95rem; opacity: .85; }
 
-  main { max-width: 960px; margin: -40px auto 0; padding: 0 14px 32px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-          padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+  main { max-width: 960px; margin: 0 auto; padding: 18px 14px 32px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+          padding: 16px; margin-bottom: 14px; }
 
   /* ---------- ফর্ম ---------- */
   form { display: grid; gap: 14px; }
@@ -62,24 +59,23 @@
   input {
     font: inherit; font-size: 18px; /* ১৬px+ হলে iPhone জুম করে না */
     min-height: 52px; padding: 10px 14px; width: 100%;
-    border: 1.5px solid var(--line); border-radius: 8px;
+    border: 1px solid #9aa9a1; border-radius: 6px;
     background: var(--bg); color: var(--text);
   }
-  input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent); }
+  input:focus { outline: 2px solid var(--primary); outline-offset: 1px; border-color: var(--primary); }
   .hint { margin: 0; color: var(--muted); font-size: .85rem; font-weight: 400; }
   button {
     font: inherit; font-size: 1.1rem; font-weight: 700; min-height: 54px; width: 100%;
-    border: 0; border-radius: 8px; cursor: pointer;
+    border: 0; border-radius: 6px; cursor: pointer;
     background: var(--primary); color: var(--on-primary);
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   }
-  button:active { transform: scale(.99); }
   button:disabled { opacity: .75; cursor: progress; }
   .spin { width: 18px; height: 18px; border: 3px solid currentColor; border-right-color: transparent;
           border-radius: 50%; animation: sp .7s linear infinite; display: none; }
   button:disabled .spin { display: inline-block; }
   @keyframes sp { to { transform: rotate(360deg); } }
-  #msg { margin: 0; padding: 12px 14px; border-radius: 8px; background: var(--err-bg); color: var(--err); font-weight: 600; }
+  #msg { margin: 0; padding: 12px 14px; border-radius: 6px; background: var(--err-bg); color: var(--err); font-weight: 600; }
   #msg:empty { display: none; }
 
   /* ---------- স্বেচ্ছাসেবকের তথ্য ---------- */
@@ -88,29 +84,25 @@
   .info span { display: block; font-size: .78rem; color: var(--muted); }
   .info b { font-weight: 700; font-size: 1.02rem; overflow-wrap: anywhere; }
 
-  .total { display: inline-block; margin: 0 0 12px; padding: 4px 12px; border-radius: 99px;
-           background: var(--chip); color: var(--primary); font-weight: 700; font-size: .95rem; }
+  .total { margin: 0 0 12px; font-weight: 700; }
 
   /* ---------- তালিকা: মোবাইলে কার্ড ---------- */
   .applist, .applist tbody { display: block; }
   .applist thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .applist tbody { display: grid; gap: 12px; }
   .applist tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; position: relative;
-       padding: 14px; padding-right: 74px; border: 1px solid var(--line); border-radius: 14px; background: var(--bg); }
+       padding: 14px; padding-right: 74px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
   .applist td { min-width: 0; overflow-wrap: anywhere; }
   .applist td::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--muted); }
   .applist td.name { grid-column: 1 / -1; font-weight: 700; font-size: 1.1rem; }
   .applist td.name::before { content: none; }
   .applist td.father, .applist td.mobile { grid-column: 1 / -1; }
-  .applist td.serial { position: absolute; top: 12px; right: 12px; padding: 2px 10px; border-radius: 99px;
-              background: var(--chip); color: var(--primary); font-weight: 700; font-size: .85rem; }
-  .applist td.serial::before { content: "ক্রম "; display: inline; font-size: inherit; color: inherit; font-weight: 400; }
-  .applist td a { color: var(--primary); font-weight: 700; text-decoration: none; }
-  .applist td a::after { content: " 📞"; }
+  .applist td.serial { position: absolute; top: 12px; right: 12px; color: var(--muted); font-size: .85rem; }
+  .applist td.serial::before { content: "ক্রম "; display: inline; font-size: inherit; color: inherit; }
+  .applist td a { color: var(--primary); font-weight: 700; text-decoration: underline; }
 
   /* ---------- বড় স্ক্রিনে টেবিল ---------- */
   @media (min-width: 720px) {
-    .hero { padding-bottom: 72px; }
     h1 { font-size: 2.1rem; }
     main { padding: 0 20px 48px; }
     .card { padding: 22px; }
@@ -123,19 +115,20 @@
     .applist tbody { display: table-row-group; }
     .applist tr { display: table-row; padding: 0; border: 0; background: none; }
     .applist th, .applist td { display: table-cell; padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
-    .applist th { background: var(--chip); color: var(--primary); font-size: .9rem; }
+    .applist th { background: var(--chip); color: var(--text); font-size: .9rem; }
     .applist td::before { content: none !important; }
     .applist td.name { font-size: inherit; }
-    .applist td.serial { position: static; padding: 10px 12px; background: none; border-radius: 0; font-weight: 400; color: inherit; font-size: inherit; }
+    .applist td.serial { position: static; padding: 10px 12px; color: inherit; font-size: inherit; }
   }
 
   /* ---------- PDF বাটন ---------- */
   .actions { display: grid; gap: 10px; grid-template-columns: 1fr; }
-  .actions h2 { margin: 0; font-size: 1rem; }
-  button.alt { background: var(--chip); color: var(--primary); border: 1.5px solid var(--primary); }
+  .actions h2 { margin: 0; font-size: 1.05rem; }
+  button.alt { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
   @media (min-width: 480px) { .actions .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; } }
   .actions .btns { display: grid; gap: 10px; }
-  #pdfMsg { margin: 0; color: var(--muted); font-size: .9rem; min-height: 1.3em; }
+  #pdfMsg { margin: 0; color: var(--muted); font-size: .9rem; }
+  #pdfMsg:empty { display: none; }
 
   /* ---------- PDF-এর পাতা (পর্দার বাইরে আঁকা হয়, সবসময় সাদা-কালো) ---------- */
   #pdfRoot { position: absolute; left: -10000px; top: 0; }
@@ -205,8 +198,8 @@
     <div class="card actions">
       <h2>PDF ডাউনলোড</h2>
       <div class="btns">
-        <button type="button" class="alt" id="btnList"><span class="spin" aria-hidden="true"></span><span>📄 তালিকা ডাউনলোড</span></button>
-        <button type="button" class="alt" id="btnTok"><span class="spin" aria-hidden="true"></span><span>🎫 টোকেন ডাউনলোড</span></button>
+        <button type="button" class="alt" id="btnList"><span class="spin" aria-hidden="true"></span><span>তালিকা ডাউনলোড (PDF)</span></button>
+        <button type="button" class="alt" id="btnTok"><span class="spin" aria-hidden="true"></span><span>টোকেন ডাউনলোড (PDF)</span></button>
       </div>
       <p id="pdfMsg" role="status" aria-live="polite"></p>
     </div>
