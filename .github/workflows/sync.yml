@@ -1,11 +1,12 @@
 name: Kobo → Supabase sync
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/30 * * * *"   # প্রতি ৩০ মিনিটে: নতুন আবেদন
+    - cron: "0 21 * * *"     # প্রতিদিন রাত ৩টা (বাংলাদেশ): পূর্ণ সিঙ্ক + Kobo-তে মুছে ফেলা আবেদন সরানো
   workflow_dispatch:
     inputs:
       full:
-        description: "সব আবেদন নতুন করে টানুন (প্রথমবার বা ডেটা মেলাতে)"
+        description: "পূর্ণ সিঙ্ক: সব আবেদন নতুন করে টানুন এবং Kobo-তে নেই এমনগুলো মুছুন"
         type: boolean
         default: false
 
@@ -17,14 +18,17 @@ jobs:
         env:
           URL: ${{ secrets.SUPABASE_URL }}/functions/v1/kobo-sync
           SECRET: ${{ secrets.SYNC_SECRET }}
-          FULL: ${{ inputs.full == true }}
+          FULL: ${{ (github.event_name == 'schedule' && github.event.schedule == '0 21 * * *') || inputs.full == true }}
         run: |
           cursor=""
+          run_start=""
           for i in $(seq 1 40); do
-            body=$(jq -n --argjson full "$FULL" --arg cursor "$cursor" '{full:$full, cursor:$cursor}')
+            body=$(jq -n --argjson full "$FULL" --arg cursor "$cursor" --arg run_start "$run_start" \
+              '{full:$full, cursor:$cursor, run_start:$run_start}')
             resp=$(curl -fsS -X POST "$URL" -H "x-sync-secret: $SECRET" -H "content-type: application/json" -d "$body")
             echo "$resp" | jq -c 'del(.next)'
             [ "$(echo "$resp" | jq -r '.done')" = "true" ] && exit 0
             cursor=$(echo "$resp" | jq -r '.next')
+            run_start=$(echo "$resp" | jq -r '.run_start // ""')
           done
           echo "সময় শেষ, পরের রানে বাকিটা হবে" >&2
