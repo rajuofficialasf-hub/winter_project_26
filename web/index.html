@@ -9,25 +9,30 @@
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 <style>
+  /* ফন্ট ও রং assunnahfoundation.org থেকে নেওয়া */
+  @font-face { font-family: "Bornomala"; font-weight: 400; font-style: normal; font-display: swap; src: url("fonts/Bornomala-Regular.woff2") format("woff2"); }
+  @font-face { font-family: "Bornomala"; font-weight: 700; font-style: normal; font-display: swap; src: url("fonts/Bornomala-Bold.woff2") format("woff2"); }
+  @font-face { font-family: "UbuntuSans"; font-weight: 400 700; font-style: normal; font-display: swap; src: url("fonts/UbuntuSans-latin.woff2") format("woff2"); }
   :root {
-    --bg: #f1f5f7; --card: #ffffff; --text: #14212b; --muted: #5a6b78; --line: #dfe6eb;
-    --primary: #0f5c4d; --primary-2: #1b7a63; --on-primary: #ffffff;
-    --gold: #e2b04a; --err-bg: #fdecea; --err: #a61b12; --chip: #e8f3ef;
-    --hero-a: #0c4a3e; --hero-b: #1b7a63;
+    --font: "UbuntuSans", "Bornomala", "Noto Sans Bengali", "Kalpurush", "Nirmala UI", sans-serif;
+    --bg: #eef2f0; --card: #ffffff; --text: #0f2920; --muted: #637381; --line: #d8e1dc;
+    --primary: #008e48; --on-primary: #ffffff;
+    --gold: #e8b65d; --orange: #d08322; --err-bg: #fdecea; --err: #b3261e; --chip: #e1f1e8;
+    --hero-a: #0f2920; --hero-b: #0a6b3a;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0e1418; --card: #172027; --text: #e8eef2; --muted: #92a3af; --line: #26323a;
-      --primary: #3cae8e; --primary-2: #2f9e82; --on-primary: #06231b;
-      --err-bg: #3a1a18; --err: #ffb4ab; --chip: #1d3a31;
-      --hero-a: #0b3a31; --hero-b: #14604f;
+      --bg: #0b1612; --card: #12221b; --text: #e8f1ec; --muted: #9bb0a6; --line: #223a2f;
+      --primary: #2fbf74; --on-primary: #062217;
+      --err-bg: #3a1a18; --err: #ffb4ab; --chip: #17382a;
+      --hero-a: #08150f; --hero-b: #0a5a33;
     }
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html { -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.55 "Noto Sans Bengali", "Kalpurush", "Nirmala UI", "SolaimanLipi", system-ui, sans-serif;
+    font: 16px/1.6 var(--font);
     padding-bottom: env(safe-area-inset-bottom);
   }
 
@@ -48,7 +53,7 @@
   .sub { margin: 0; font-size: .95rem; opacity: .9; }
 
   main { max-width: 960px; margin: -40px auto 0; padding: 0 14px 32px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
           padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
 
   /* ---------- ফর্ম ---------- */
@@ -57,14 +62,14 @@
   input {
     font: inherit; font-size: 18px; /* ১৬px+ হলে iPhone জুম করে না */
     min-height: 52px; padding: 10px 14px; width: 100%;
-    border: 1.5px solid var(--line); border-radius: 12px;
+    border: 1.5px solid var(--line); border-radius: 8px;
     background: var(--bg); color: var(--text);
   }
   input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent); }
   .hint { margin: 0; color: var(--muted); font-size: .85rem; font-weight: 400; }
   button {
     font: inherit; font-size: 1.1rem; font-weight: 700; min-height: 54px; width: 100%;
-    border: 0; border-radius: 12px; cursor: pointer;
+    border: 0; border-radius: 8px; cursor: pointer;
     background: var(--primary); color: var(--on-primary);
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   }
@@ -74,7 +79,7 @@
           border-radius: 50%; animation: sp .7s linear infinite; display: none; }
   button:disabled .spin { display: inline-block; }
   @keyframes sp { to { transform: rotate(360deg); } }
-  #msg { margin: 0; padding: 12px 14px; border-radius: 12px; background: var(--err-bg); color: var(--err); font-weight: 600; }
+  #msg { margin: 0; padding: 12px 14px; border-radius: 8px; background: var(--err-bg); color: var(--err); font-weight: 600; }
   #msg:empty { display: none; }
 
   /* ---------- স্বেচ্ছাসেবকের তথ্য ---------- */
@@ -135,38 +140,38 @@
   /* ---------- PDF-এর পাতা (পর্দার বাইরে আঁকা হয়, সবসময় সাদা-কালো) ---------- */
   #pdfRoot { position: absolute; left: -10000px; top: 0; }
   .pdf-page { width: 794px; height: 1123px; background: #fff; color: #000; position: relative; overflow: hidden;
-              font: 13px/1.3 "Noto Sans Bengali", "Kalpurush", "Nirmala UI", "SolaimanLipi", system-ui, sans-serif; }
+              font: 13px/1.3 var(--font); }
   .pdf-list { padding: 36px 40px; }
-  .pdf-brand { display: flex; align-items: center; justify-content: center; gap: 16px; }
+  .pdf-brand { display: flex; align-items: center; justify-content: center; gap: 16px; padding-bottom: 10px; border-bottom: 3px solid #008e48; }
   .pdf-logo { height: 72px; width: auto; display: block; }
-  .pdf-org { font-size: 22px; font-weight: 700; }
+  .pdf-org { font-size: 22px; font-weight: 700; color: #0f2920; }
   .pdf-proj { font-size: 15px; margin-top: 2px; }
   .pdf-minibrand { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
   .pdf-minilogo { height: 30px; width: auto; display: block; }
   .pdf-vol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 12px; margin: 14px 0 12px;
-             padding: 8px 10px; border: 1px solid #888; font-size: 12.5px; }
+             padding: 8px 10px; border: 1px solid #9bb5a8; font-size: 12.5px; }
   .pdf-vol b { font-weight: 700; }
   .pdf-mini { font-size: 13px; font-weight: 700; }
   .pdf-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 12.5px; }
   .pdf-table th, .pdf-table td { border: 1px solid #777; padding: 0 5px; text-align: left; vertical-align: middle; }
-  .pdf-table th { background: #e9e9e9; color: #000; height: 28px; font-weight: 700; }
+  .pdf-table th { background: #e1f1e8; color: #0f2920; height: 28px; font-weight: 700; }
   .pdf-table td { height: 34px; }
   .pdf-table td > div { max-height: 30px; line-height: 15px; overflow: hidden; }
   .pdf-foot { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 11px; color: #444; }
 
-  .pdf-tok { padding: 28px; }
+  .pdf-tok { padding: 20px 24px; }
   .tok-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(9, 1fr);
               height: 100%; border-top: 1px dashed #666; border-left: 1px dashed #666; }
-  .tok { border-right: 1px dashed #666; border-bottom: 1px dashed #666; padding: 6px 9px; overflow: hidden;
-         font-size: 10.5px; line-height: 13px; min-width: 0; }
-  .tok-top { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid #999; padding-bottom: 2px; margin-bottom: 3px; }
-  .tok-logo { height: 28px; width: auto; display: block; flex: none; }
+  .tok { border-right: 1px dashed #666; border-bottom: 1px dashed #666; padding: 3px 9px 3px; overflow: hidden;
+         font-size: 10.5px; line-height: 15px; min-width: 0; }
+  .tok-top { display: flex; align-items: center; gap: 6px; border-bottom: 1.5px solid #008e48; padding-bottom: 2px; margin-bottom: 2px; }
+  .tok-logo { height: 24px; width: auto; display: block; flex: none; }
   .tok-brand { flex: 1; text-align: center; }
-  .tok-org { font-weight: 700; font-size: 12.5px; line-height: 15px; }
-  .tok-proj { font-size: 10.5px; line-height: 13px; }
-  .tok-no { font-weight: 700; font-size: 14.5px; line-height: 19px; }
-  .tok-line { white-space: nowrap; overflow: hidden; }
-  .tok-addr { max-height: 26px; overflow: hidden; }
+  .tok-org { font-weight: 700; font-size: 12px; line-height: 14px; }
+  .tok-proj { font-size: 10px; line-height: 13px; }
+  .tok-no { font-weight: 700; font-size: 14px; line-height: 17px; color: #0f2920; }
+  .tok-line { white-space: nowrap; overflow: hidden; line-height: 15px; }
+  .tok-addr { max-height: 31px; overflow: hidden; }
 
   footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 4px 16px 28px; }
   [hidden] { display: none !important; }
@@ -382,6 +387,10 @@
     await ensureLibs();
     const root = $("pdfRoot");
     root.replaceChildren(...pages);
+    if (document.fonts && document.fonts.load) {
+      await Promise.all(["400 13px Bornomala", "700 13px Bornomala", "400 13px UbuntuSans", "700 13px UbuntuSans"]
+        .map((f) => document.fonts.load(f, "আবক0Aa").catch(() => 0)));
+    }
     if (document.fonts && document.fonts.ready) await document.fonts.ready;
     // লোগো পুরো লোড না হলে PDF-এ ফাঁকা আসত
     await Promise.all([...root.querySelectorAll("img")].map((im) =>
