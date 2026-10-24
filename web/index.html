@@ -91,15 +91,18 @@
   .applist thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .applist tbody { display: grid; gap: 12px; }
   .applist tr { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; position: relative;
-       padding: 14px; padding-right: 74px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
+       padding: 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); }
   .applist td { min-width: 0; overflow-wrap: anywhere; }
   .applist td::before { content: attr(data-label); display: block; font-size: .75rem; color: var(--muted); }
-  .applist td.name { grid-column: 1 / -1; font-weight: 700; font-size: 1.1rem; }
+  .applist td.name { grid-column: 1 / -1; font-weight: 700; font-size: 1.1rem; padding-right: 64px; }
   .applist td.name::before { content: none; }
   .applist td.father, .applist td.mobile { grid-column: 1 / -1; }
   .applist td.serial { position: absolute; top: 12px; right: 12px; color: var(--muted); font-size: .85rem; }
   .applist td.serial::before { content: "ক্রম "; display: inline; font-size: inherit; color: inherit; }
   .applist td a { color: var(--primary); font-weight: 700; text-decoration: underline; }
+  .applist td.tokbtn { grid-column: 1 / -1; }
+  .applist td.tokbtn::before { content: none; }
+  .applist button.mini { width: 100%; min-height: 44px; font-size: 1rem; font-weight: 600; }
 
   /* ---------- বড় স্ক্রিনে টেবিল ---------- */
   @media (min-width: 720px) {
@@ -114,11 +117,14 @@
     .applist thead { position: static; width: auto; height: auto; overflow: visible; clip: auto; display: table-header-group; }
     .applist tbody { display: table-row-group; }
     .applist tr { display: table-row; padding: 0; border: 0; background: none; }
-    .applist th, .applist td { display: table-cell; padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    .applist th, .applist td { display: table-cell; padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+    .applist td { overflow-wrap: normal; }
+    .applist td.mobile { white-space: nowrap; }
     .applist th { background: var(--chip); color: var(--text); font-size: .9rem; }
     .applist td::before { content: none !important; }
-    .applist td.name { font-size: inherit; }
+    .applist td.name { font-size: inherit; padding-right: 8px; }
     .applist td.serial { position: static; padding: 10px 12px; color: inherit; font-size: inherit; }
+    .applist button.mini { width: auto; min-height: 32px; font-size: .85rem; padding: 0 12px; white-space: nowrap; }
   }
 
   /* ---------- PDF বাটন ---------- */
@@ -152,19 +158,26 @@
   .pdf-table td > div { max-height: 30px; line-height: 15px; overflow: hidden; }
   .pdf-foot { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 11px; color: #444; }
 
-  .pdf-tok { padding: 20px 24px; }
-  .tok-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(9, 1fr);
+  /* টোকেন: A4 আড়াআড়ি, ৩ কলাম x ৫ সারি, প্রতিটি প্রায় 358x149px */
+  .pdf-land { width: 1123px; height: 794px; }
+  .pdf-tok { padding: 24px; }
+  .tok-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(5, 1fr);
               height: 100%; border-top: 1px dashed #666; border-left: 1px dashed #666; }
-  .tok { border-right: 1px dashed #666; border-bottom: 1px dashed #666; padding: 3px 9px 3px; overflow: hidden;
-         font-size: 10.5px; line-height: 15px; min-width: 0; }
-  .tok-top { display: flex; align-items: center; gap: 6px; border-bottom: 1.5px solid #008e48; padding-bottom: 2px; margin-bottom: 2px; }
-  .tok-logo { height: 24px; width: auto; display: block; flex: none; }
+  .tok { position: relative; border-right: 1px dashed #666; border-bottom: 1px dashed #666; padding: 4px 12px; overflow: hidden;
+         font-size: 14px; line-height: 19px; min-width: 0; }
+  .tok > * { position: relative; }
+  .tok > .tok-wm { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center;
+                   justify-content: center; opacity: .10; }
+  .tok-wm img { width: 130px; height: auto; display: block; }
+  .tok-top { display: flex; align-items: center; gap: 8px; border-bottom: 1.5px solid #008e48; padding-bottom: 2px; margin-bottom: 2px; }
+  .tok-logo { height: 30px; width: auto; display: block; flex: none; }
   .tok-brand { flex: 1; text-align: center; }
-  .tok-org { font-weight: 700; font-size: 12px; line-height: 14px; }
-  .tok-proj { font-size: 10px; line-height: 13px; }
-  .tok-no { font-weight: 700; font-size: 14px; line-height: 17px; color: #0f2920; }
-  .tok-line { white-space: nowrap; overflow: hidden; line-height: 15px; }
-  .tok-addr { max-height: 31px; overflow: hidden; }
+  .tok-org { font-weight: 700; font-size: 16px; line-height: 18px; }
+  .tok-proj { font-size: 13px; line-height: 16px; }
+  .tok-no { font-weight: 700; font-size: 18px; line-height: 21px; color: #0f2920; }
+  .tok-line { white-space: nowrap; overflow: hidden; line-height: 19px; }
+  .tok-addr { max-height: 38px; overflow: hidden; }
+  .tok-single { width: 358px; height: 149px; border: 1px dashed #666; }
 
   footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 4px 16px 28px; }
   [hidden] { display: none !important; }
@@ -207,7 +220,7 @@
       <p class="total" id="total"></p>
       <table class="applist">
         <thead><tr>
-          <th>ক্রম</th><th>উপকারভোগীর নাম</th><th>পিতার নাম</th><th>মোবাইল</th><th>ইউনিয়ন</th><th>গ্রাম</th>
+          <th>ক্রম</th><th>উপকারভোগীর নাম</th><th>পিতার নাম</th><th>মোবাইল</th><th>ইউনিয়ন</th><th>গ্রাম</th><th>টোকেন</th>
         </tr></thead>
         <tbody id="rows"></tbody>
       </table>
@@ -265,6 +278,9 @@
       cell(tr, "mobile", "মোবাইল", r.mobile, true);
       cell(tr, "union", "ইউনিয়ন", r.union);
       cell(tr, "village", "গ্রাম", r.village);
+      const tb = document.createElement("td"), bt = document.createElement("button");
+      tb.className = "tokbtn"; bt.type = "button"; bt.className = "alt mini"; bt.dataset.i = i;
+      bt.textContent = "টোকেন ডাউনলোড"; tb.appendChild(bt); tr.appendChild(tb);
       tbody.appendChild(tr);
     });
     $("result").hidden = false;
@@ -273,7 +289,7 @@
 
   /* ================= PDF ================= */
   let lastData = null;
-  const LIST_FIRST = 24, LIST_NEXT = 28, TOK_PER_PAGE = 27;
+  const LIST_FIRST = 24, LIST_NEXT = 28, TOK_PER_PAGE = 15;
 
   // নিরাপদে এলিমেন্ট বানায় (textContent), ডেটার HTML চলে না
   function el(tag, cls, text) {
@@ -342,25 +358,36 @@
     while (node.scrollWidth > node.clientWidth && size > minPx) { size -= 0.5; node.style.fontSize = size + "px"; }
   }
 
+  // একটি টোকেন। শিট ও একক ডাউনলোড দুটোই এটি ব্যবহার করে, তাই ডিজাইন সবসময় এক
+  function makeToken(r, n, v) {
+    const t = el("div", "tok");
+    const wm = el("div", "tok-wm"); wm.appendChild(logo("")); t.appendChild(wm); // মাঝখানে লোগোর জলছাপ
+    const top = el("div", "tok-top"), brand = el("div", "tok-brand");
+    brand.append(el("div", "tok-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "tok-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"));
+    top.append(logo("tok-logo"), brand);
+    t.append(top, el("div", "tok-no", "টোকেন নম্বর : " + bn(n)));
+    t.append(el("div", "tok-line tok-name", "নাম : " + (r.name || "")),
+             el("div", "tok-line tok-father", "পিতা : " + (r.father || "")));
+    const addr = [r.village, r.union, v.upazila, v.district].filter(Boolean).join(", ");
+    t.appendChild(el("div", "tok-addr", "ঠিকানা : " + addr));
+    return t;
+  }
+
   function buildTokenPages(d) {
-    const v = d.volunteer, pages = [];
+    const pages = [];
     for (let i = 0; i < d.rows.length; i += TOK_PER_PAGE) {
-      const page = el("div", "pdf-page pdf-tok"), grid = el("div", "tok-grid");
-      d.rows.slice(i, i + TOK_PER_PAGE).forEach((r, k) => {
-        const t = el("div", "tok");
-        const top = el("div", "tok-top"), brand = el("div", "tok-brand");
-        brand.append(el("div", "tok-org", "আস-সুন্নাহ ফাউন্ডেশন"), el("div", "tok-proj", "শীতবস্ত্র বিতরণ প্রকল্প-২০২৬"));
-        top.append(logo("tok-logo"), brand);
-        t.append(top, el("div", "tok-no", "টোকেন নম্বর : " + bn(i + k + 1)));
-        t.append(el("div", "tok-line tok-name", "নাম : " + (r.name || "")),
-                 el("div", "tok-line tok-father", "পিতা : " + (r.father || "")));
-        const addr = [r.village, r.union, v.upazila, v.district].filter(Boolean).join(", ");
-        t.appendChild(el("div", "tok-addr", "ঠিকানা : " + addr));
-        grid.appendChild(t);
-      });
+      const page = el("div", "pdf-page pdf-land pdf-tok"), grid = el("div", "tok-grid");
+      d.rows.slice(i, i + TOK_PER_PAGE).forEach((r, k) => grid.appendChild(makeToken(r, i + k + 1, d.volunteer)));
       page.appendChild(grid); pages.push(page);
     }
     return pages;
+  }
+
+  function buildSingleTokenPage(d, index) { // শিটের মতো একই মাপ, পাতার উপরে-বামে
+    const page = el("div", "pdf-page pdf-land pdf-tok"), t = makeToken(d.rows[index], index + 1, d.volunteer);
+    t.classList.add("tok-single");
+    page.appendChild(t);
+    return page;
   }
 
   function loadScript(src) {
@@ -388,34 +415,37 @@
     // লোগো পুরো লোড না হলে PDF-এ ফাঁকা আসত
     await Promise.all([...root.querySelectorAll("img")].map((im) =>
       im.complete && im.naturalWidth ? 0 : new Promise((ok) => { im.onload = im.onerror = ok; })));
-    root.querySelectorAll(".tok-name, .tok-father").forEach((n) => shrinkToFit(n, 7.5));
+    root.querySelectorAll(".tok-name, .tok-father").forEach((n) => shrinkToFit(n, 9));
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait", compress: true });
+    const land = !!opts.landscape, W = land ? 1123 : 794, H = land ? 794 : 1123;
+    const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: land ? "landscape" : "portrait", compress: true });
     try {
       for (let i = 0; i < pages.length; i++) {
-        const canvas = await html2canvas(pages[i], { scale: opts.scale || 2.2, backgroundColor: "#ffffff",
-          logging: false, width: 794, height: 1123, windowWidth: 794 });
+        const canvas = await html2canvas(pages[i], { scale: opts.scale || 2, backgroundColor: "#ffffff",
+          logging: false, width: W, height: H, windowWidth: W });
         if (i) pdf.addPage();
-        pdf.addImage(canvas.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, 210, 297);
+        pdf.addImage(canvas.toDataURL("image/jpeg", 0.85), "JPEG", 0, 0, land ? 297 : 210, land ? 210 : 297);
         canvas.width = canvas.height = 0; // মেমরি ছাড়ুন
       }
     } finally { root.replaceChildren(); }
     return pdf;
   }
 
-  function fileName(kind) {
+  function fileName(kind, n) {
     const spot = String((lastData && lastData.volunteer.spot_code) || "spot").replace(/[^\w\-]+/g, "") || "spot";
+    if (kind === "single") return "token-spot-" + spot + "-no-" + n + ".pdf";
     return (kind === "list" ? "talika" : "token") + "-spot-" + spot + ".pdf";
   }
+  const allBtns = () => [...document.querySelectorAll("button.alt")];
 
   async function downloadPdf(kind, btn) {
     if (!lastData) return;
-    const msg = $("pdfMsg"), all = [$("btnList"), $("btnTok")];
+    const msg = $("pdfMsg"), all = allBtns();
     all.forEach((b) => (b.disabled = true));
     msg.textContent = "PDF তৈরি হচ্ছে, একটু অপেক্ষা করুন…";
     try {
       const pages = kind === "list" ? buildListPages(lastData) : buildTokenPages(lastData);
-      const pdf = await makePdf(pages);
+      const pdf = await makePdf(pages, { landscape: kind === "token" });
       pdf.save(fileName(kind));
       msg.textContent = "ডাউনলোড শুরু হয়েছে (" + bn(pages.length) + " পৃষ্ঠা)।";
     } catch (err) {
@@ -423,6 +453,23 @@
       msg.textContent = "PDF তৈরি করা যায়নি। ইন্টারনেট ঠিক আছে কি না দেখে আবার চেষ্টা করুন।";
     } finally { all.forEach((b) => (b.disabled = false)); }
   }
+  async function downloadSingle(i, btn) { // একজনের টোকেন
+    if (!lastData || !lastData.rows[i]) return;
+    const all = allBtns(), label = btn.textContent;
+    all.forEach((b) => (b.disabled = true));
+    btn.textContent = "তৈরি হচ্ছে…";
+    try {
+      const pdf = await makePdf([buildSingleTokenPage(lastData, i)], { landscape: true });
+      pdf.save(fileName("single", i + 1));
+    } catch (err) {
+      console.error(err);
+      $("pdfMsg").textContent = "PDF তৈরি করা যায়নি। ইন্টারনেট ঠিক আছে কি না দেখে আবার চেষ্টা করুন।";
+    } finally { btn.textContent = label; all.forEach((b) => (b.disabled = false)); }
+  }
+  $("rows").addEventListener("click", (e) => {
+    const b = e.target.closest("button[data-i]");
+    if (b) downloadSingle(+b.dataset.i, b);
+  });
   $("btnList").addEventListener("click", () => downloadPdf("list"));
   $("btnTok").addEventListener("click", () => downloadPdf("token"));
 
